@@ -8,9 +8,9 @@ export default function Home() {
         </div>
         <div className="container mx-auto rounded-lg border w-full p-6 flex flex-col gap-y-8 mt-8">
        <p className="border text-xl font-light text-justify">
-          A tech start-up, India's first-ever online C2C marketplace dedicated to buying and selling Old, Refurbished & Used phones.
+          A tech start-up, India&apos;s first-ever online C2C marketplace dedicated to buying and selling Old, Refurbished & Used phones.
           In 2020, only 20 million units of used smartphones were traded while there were more than 100 million smartphones just left idle at home, sitting in drawers. The cumulative second-hand market will reach 245 million units by 2025 of which only about 20% units will be traded despite the strong demand for used smartphones in India.
-          We aim to bring those unused second-hand smartphones to the market so that “Smartphone owners (sellers)” reap profits by selling their unused assets and buyers can afford their desired smartphones.
+          We aim to bring those unused second-hand smartphones to the market so that &quot;Smartphone owners (sellers)&quot; reap profits by selling their unused assets and buyers can afford their desired smartphones.
           This is achievable with our strong technology stack and a dedicated team of professionals.
         </p>
        </div>
