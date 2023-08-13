@@ -4,7 +4,17 @@ import User from "../../../../models/user";
 import argon2i from "argon2";
 
 export const POST = async (req) => {
-  const { name, email, mobile, password } = await req.json();
+  const { fname,
+    lname,
+    email,
+    mobile,
+    password,
+    skills,
+    experiences,
+    educations,
+    certificates,
+    about,
+    professionalDetail } = await req.json();
 
   try {
     await connectDB();
@@ -14,7 +24,7 @@ export const POST = async (req) => {
       return NextResponse.json({ error: 'User already exists !' }, { status: 422});
     } else {
       const passHash = await argon2i.hash(password);
-      const result = new Candidate({ name, email, mobile, password: passHash, role });
+      const result = new User({ fname, lname, email, mobile, password:passHash, skills, experiences, educations, certificates, about, professionalDetail, name:`${fname} ${lname}` });
       const data = await result.save();
 
       if (data) {
@@ -25,6 +35,6 @@ export const POST = async (req) => {
     }
 
   } catch (error) {
-    return NextResponse.json({ error: 'Internal Server Error: '+ error }, { status: 500 })
+    return NextResponse.json({ error: 'Internal Server Error: ' + error }, { status: 500 })
   }
 };

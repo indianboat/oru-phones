@@ -2,39 +2,43 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    name: String,
+    name:String, // for session use
+    fname: String,
+    lname: String,
     email: { type: String, unique: true },
     mobile: String,
     password: String,
     about:String,
     skills:[{type:String}],
-    education:[
+    educations:[
       {
-        college:String,
+        university:String,
         city:String,
+        state:String,
         batch:String,
         degreeName:String,
         desc:String
       }
     ],
-    experience:[
+    experiences:[
       {
         from:Date,
-        to:Date,
-        company:String,
+        end:Date,
+        companyName:String,
         designation:String,
-        workType:String
+        workType:{type:String, default:"full_time"}
       }
     ],
-    certificat:[
+    certificates:[
       {
         courseName:String,
         companyName:String,
-        duration:Number
+        from:Date,
+        end:Date
       }
     ],
     professionalDetail:String,
-    img:String,
+    imgUrl:String,
     connections:[
       {
         connectionName:String,
