@@ -12,8 +12,8 @@ export default async function Home() {
   return (
     <>
       <div className="border flex flex-col justify-center items-center mt-4 p-6">
-        <div className="container mx-auto bg-[#2C2F44] rounded-lg h-48 border w-full p-8 flex flex-col justify-center gap-y-8">
-          <h1 className="border text-6xl font-bold text-white">Welcome to ORU Phones</h1>
+        <div className="container mx-auto bg-[#2C2F44] rounded-lg h-auto border w-full p-8 flex flex-col justify-center gap-y-8">
+          <h1 className="border lg:text-6xl md:text-5xl sm:text-4xl text-3xl font-bold text-white">Welcome to ORU Phones</h1>
           <p className="border text-xl font-medium text-white">C2C online marketplace for Old, Refurbished & Used phones</p>
         </div>
         <div className="container mx-auto rounded-lg border w-full p-6 flex flex-col gap-y-8 mt-8">
