@@ -9,6 +9,7 @@ import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 import { signIn, useSession} from "next-auth/react";
 import toast, { Toaster } from 'react-hot-toast';
 import { redirect } from "next/navigation";
+import Spinner from "../components/Spinner";
 
 
 const Signin = () => {
@@ -45,7 +46,7 @@ const Signin = () => {
   }
 
   if(status === "loading"){
-    return "loading..."
+    return <Spinner />
   }
   if(status === "authenticated"){
     redirect("/profile");
@@ -54,13 +55,13 @@ const Signin = () => {
   return (
     <>
     <Toaster/>
-      <div className="container flex flex-col md:w-11/12 sm:w-full w-full mx-auto my-6 border p-4">
+      <div className="container flex flex-col md:w-11/12 sm:w-full w-full mx-auto my-6 p-4">
         <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 grid-cols-1 justify-between gap-y-8">
-          <div className="border lg:rounded-tl-[50px] xl:py-16 lg:py-16 md:py-14 sm:py-12 py-6 xl:px-28 lg:px-16 md:px-14 sm:px-8 px-3 bg-slate-50 dark:bg-neutral-900">
+          <div className="lg:rounded-tl-[50px] xl:py-16 lg:py-16 md:py-14 sm:py-12 py-6 xl:px-28 lg:px-16 md:px-14 sm:px-8 px-3 bg-slate-50 dark:bg-neutral-900">
             <h1 className="font-semibold text-3xl drop-shadow">
               Welcome back
             </h1>
-            <p className="border mt-2 text-slate-700 dark:text-slate-200">
+            <p className="mt-2 text-slate-700 dark:text-slate-200">
               Please enter your details.
             </p>
             <form className="mt-6" onSubmit={formik.handleSubmit}>
@@ -122,7 +123,7 @@ const Signin = () => {
               </div>
               <div className="flex justify-center">
                 <button
-                  className="px-3 py-2 outline-purple-950 bg-[#7F56DA] active:scale-95 transition-transform text-white border w-full rounded-lg"
+                  className="px-3 py-2 outline-purple-950 bg-[#7F56DA] active:scale-95 transition-transform text-white w-full rounded-lg"
                   type="submit"
                 >
                   Sign in

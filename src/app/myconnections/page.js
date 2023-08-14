@@ -1,8 +1,10 @@
-import React from 'react'
+import React from 'react';
 
 const MyConnections = () => {
   return (
-    <div>MyConnections</div>
+  <>
+    <div className="">My connections</div>
+  </>
   )
 }
 

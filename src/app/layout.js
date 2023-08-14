@@ -1,8 +1,10 @@
+import { Suspense } from 'react';
 import Navbar from './components/Navbar'
 import Provider from './components/Provider'
 import './globals.css'
 import { Poppins } from 'next/font/google';
 import NextTopLoader from 'nextjs-toploader';
+import Loading from './loading';
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'] })
 
@@ -24,7 +26,9 @@ export default function RootLayout({ children }) {
         />
         <Provider>
           <Navbar />
-          {children}
+          <Suspense fallback={<Loading />}>
+            {children}
+          </Suspense>
         </Provider>
       </body>
     </html>

@@ -34,16 +34,15 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="sticky top-0 border py-4 z-50 shadow-md px-4 flex border-red-500 backdrop-saturate-[80%] backdrop-blur-sm bg-white/80 dark:bg-[#121212]/70">
-        <div className="border w-full flex items-center justify-between">
-
+      <nav className="sticky top-0 py-4 z-50 shadow-md px-4 flex backdrop-saturate-[80%] backdrop-blur-sm bg-white/80 dark:bg-[#121212]/70">
+        <div className="w-full flex items-center justify-between">
 
           <div className={session?"flex items-center justify-between gap-x-6":"flex items-center justify-between w-full gap-x-6"}>
-            <button onClick={drawerHandler} className={session?"border bg-slate-100 p-1 rounded-full flex items-center justify-center":"border lg:hidden md:hidden sm:flex flex items-center justify-center"}>
+            <button onClick={drawerHandler} className={session?"bg-slate-100 p-1 rounded-full flex items-center justify-center":"lg:hidden md:hidden sm:flex flex items-center justify-center"}>
               <Image src="hamburger.svg" width={35} height={35} alt="hamburger-icon" />
             </button>
-            <div className="flex gap-x-6 justify-center border items-center">
-              <Link href={session ? "/profile" : "/"}><Image className="border" src="logo.svg" width={82} height={37} alt="company-logo" /></Link>
+            <div className="flex gap-x-6 justify-center items-center">
+              <Link href={session ? "/profile" : "/"}><Image src="logo.svg" width={82} height={37} alt="company-logo" /></Link>
               <Link className="lg:flex md:flex sm:hidden hidden" href={session ? "/profile" : "/"}>Home</Link>
             </div>
           </div>
@@ -55,7 +54,7 @@ const Navbar = () => {
                 <button><Image src="notificationIcon.svg" width={25} height={25} alt="notification-icon" /></button>
               </div>
 
-              <div className="border p-2 lg:flex md:flex sm:hidden hidden gap-x-6 items-center rounded-md">
+              <div className="p-2 lg:flex md:flex sm:hidden hidden gap-x-6 items-center rounded-md">
                 <div className="flex items-center gap-x-3">
                   <Image src="avatar.svg" width={38} className=" rounded-md bg-[#FFA78D] " height={38} alt="avatar" />
                   <div className="flex flex-col">
@@ -67,13 +66,13 @@ const Navbar = () => {
                   <button><IoIosArrowDown className="text-[#1E2875]" size={20} strokeWidth={0.5} /></button>
                 </div>
               </div>
-              <div className="border lg:hidden md:hidden sm:flex flex gap-x-4 items-center rounded-full">
+              <div className="lg:hidden md:hidden sm:flex flex gap-x-4 items-center rounded-full">
                 <button><Image src="avatar.svg" width={38} className=" rounded-full bg-[#FFA78D] " height={38} alt="avatar" /></button>
               </div>
             </div>) :
-              (<div className="border lg:flex md:flex sm:hidden hidden items-center w-full justify-end gap-x-4">
-                <Link className="border active:scale-95 transition-transform py-2 px-4 shadow rounded-full" href="/login">Login</Link>
-                <Link className="border active:scale-95 transition-transform py-2 px-4 shadow bg-[#2C2F44] text-white rounded-full" href="/signup">Sign up</Link>
+              (<div className="lg:flex md:flex sm:hidden hidden items-center w-full justify-end gap-x-4">
+                <Link className="active:scale-95 transition-transform py-2 px-4 shadow rounded-full" href="/login">Login</Link>
+                <Link className="active:scale-95 transition-transform py-2 px-4 shadow bg-[#2C2F44] text-white rounded-full" href="/signup">Sign up</Link>
               </div>)
           }
 
@@ -90,7 +89,7 @@ const Navbar = () => {
               animate="open"
               exit="closed"
               variants={drawerVariants}
-              className="fixed bg-white z-50 dark:bg-[#18191C] shadow-md h-screen lg:w-64 md:w-60 sm:w-56 w-56 inset-0"
+              className="fixed bg-white z-50 dark:bg-[#18191C] overflow-y-auto shadow-md h-screen lg:w-64 md:w-60 sm:w-56 w-56 inset-0"
             >
               {
                 session ?
@@ -98,14 +97,12 @@ const Navbar = () => {
                     <div className="flex justify-center mt-3">
                       <Link onClick={handleLinkClick} href={session ? "/profile" : "/"} className="border py-2 px-4 shadow-sm rounded-lg text-[#222222]">Dashboard</Link>
                     </div>
-                    <div className="mt-5 flex flex-col justify-between items-center h-full">
+                    <div className="mt-5 flex flex-col justify-between items-center">
                       <ul className="flex flex-col justify-center items-start gap-y-4 w-fit p-2">
                         <li className="flex items-center w-full gap-x-2"><IoIosArrowForward className="text-[#9197B3]" /><Link href="/profile" onClick={handleLinkClick} className="text-[#1A1558] hover:border-[#1A1558] hover:border-2 border-2 transition-colors text-base py-2 px-4 w-full shadow-sm rounded-lg">My Profile</Link></li>
                         <li className="flex items-center w-full gap-x-2"><IoIosArrowForward className="text-[#9197B3]" /><Link href="/myconnections" onClick={handleLinkClick} className="text-[#1A1558] hover:border-[#1A1558] hover:border-2 border-2 transition-colors text-base py-2 px-4 w-full shadow-sm rounded-lg">My Connections</Link></li>
+                        <li className="flex items-center justify-start w-full gap-x-2"><IoIosArrowForward className="text-[#9197B3]" /><button onClick={handleSignout} className="text-[#e75252] hover:border-[#cc4f4f] hover:border-2 text-left border-2 transition-colors text-base py-2 px-4 w-full shadow-sm rounded-lg">Logout</button></li>
                       </ul>
-                      <div className="absolute bottom-0">
-                        <button onClick={handleSignout} className="hover:text-[#ff5a5a] transition-colors text-md font-semibold py-3  shadow-sm">Logout</button>
-                      </div>
                     </div>
                   </>
                   :

@@ -10,23 +10,23 @@ const userSchema = new mongoose.Schema(
     password: String,
     about:String,
     skills:[{type:String}],
-    educations:[
+    education:[
       {
         university:String,
         city:String,
         state:String,
         batch:String,
         degreeName:String,
-        desc:String
       }
     ],
-    experiences:[
+    experience:[
       {
-        from:Date,
-        end:Date,
+        from:Number,
+        end:Number,
+        totalExperience:String,
         companyName:String,
         designation:String,
-        workType:{type:String, default:"full_time"}
+        workType:String
       }
     ],
     certificates:[
