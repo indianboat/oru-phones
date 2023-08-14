@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema(
     imgUrl:String,
     connections:[
       {
-        connectionName:String,
+        name:String,
         role:String,
         company:String
       }
