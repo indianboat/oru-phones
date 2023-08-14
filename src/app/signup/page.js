@@ -49,61 +49,47 @@ const Signup = () => {
 
     if (res.status == 422) {
       setLoading(false);
-      toast("User already exists !");
+      toast.error("User already exists !");
     }
 
     else if (res.status == 201) {
       setLoading(false);
-      toast("Sign up Success, redirecting...");
       resetForm();
-      push("/login");
+      toast.success("Sign up Success, redirecting...");
+      setTimeout(() => {
+        push("/login");
+      }, 2000);
     }
 
     else if (res.status == 500) {
       setLoading(false);
-      toast("Internal Server Error, Please try again later !");
+      toast.error("Internal Server Error, Please try again later !");
     }
   }
 
 
   const monthSample = [];
   const yearsSample = [];
-
   const numberSample = [];
 
   for (let index = 1; index < 12; index++) {
-    if (index == 1) {
-      monthSample.push(`${index} Month`);
-    }
-    else {
-      monthSample.push(`${index} Months`);
-    }
+    if (index == 1) { monthSample.push(`${index} Month`)}
+    else { monthSample.push(`${index} Months`) }
   }
 
-
-  for (let i = 1990; i < 2024; i++) {
-    yearsSample.push(i);
-  }
-
-  // for month array
-
+  for (let i = 1990; i < 2024; i++) { yearsSample.push(i) }
   for (let j = 1; j < 19; j++) {
-    if (j == 1) {
-      numberSample.push(`${j} Year`);
-    }
-    else {
-      numberSample.push(`${j} Years`);
-
-    }
+    if (j == 1) { numberSample.push(`${j} Year`)}
+    else { numberSample.push(`${j} Years`)}
   }
+
   const expYears = [...monthSample, ...numberSample];
+
 
   return (
     <>
-      <Toaster />
-      {
-        loading ? <Spinner/> : null 
-      }
+      <Toaster toastOptions={{ duration:1900 }} />
+      { loading ? <Spinner/> : null }
 
       <div className="container flex flex-col lg:w-10/12 md:w-11/12 sm:w-full w-full mx-auto my-6 p-4 shadow-lg rounded-2xl">
         <div className="flex w-full justify-between gap-y-8">
@@ -173,7 +159,6 @@ const Signup = () => {
                       </button>)
                     }
                   </div>
-
                   <AnimatePresence>
                     {showAbout ? (<>
                       <motion.div initial={{ opacity: 0, y: 20 }}
@@ -362,12 +347,12 @@ const Signup = () => {
                                 />
                               </div>
                               <div>
-                                <label htmlFor={`education[${index}].degree`} className="text-slate-600 dark:text-slate-200 text-sm">Degree</label>
+                                <label htmlFor={`education[${index}].degreeName`} className="text-slate-600 dark:text-slate-200 text-sm">Degree</label>
                                 <Field
                                   type="text"
-                                  id={`education[${index}].degree`}
-                                  name={`education[${index}].degree`}
-                                  placeholder="Enter degree"
+                                  id={`education[${index}].degreeName`}
+                                  name={`education[${index}].degreeName`}
+                                  placeholder="Enter degree name"
                                   className="w-full focus:ring-2 shadow ring-[#7F56DA] border-2 px-3 py-2 transition-all dark:border-[#3B3B3B] rounded-lg outline-none focus:border-gray-300"
                                   required
                                 />
@@ -460,7 +445,6 @@ const Signup = () => {
                                   onChange={(e) => setNewSkill(e.target.value)}
                                   className="w-full focus:ring-2 shadow ring-[#7F56DA] border-2 px-3 py-2 transition-all dark:border-[#3B3B3B] rounded-lg outline-none focus:border-gray-300"
                                   placeholder="Enter skill"
-                                  required
                                   onKeyDown={(e) => {
                                     if (e.key === "Enter" && e.target.value.trim() !== "") {
                                       e.preventDefault();

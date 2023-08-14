@@ -10,7 +10,7 @@ export const GET = async (req , context) =>{
     await connectDB();
       const result = await User.findOne({ email})
       if(!result){
-        return new NextResponse("User not found", {status:422});
+        return new NextResponse("user not found", {status:422});
       }
       else{
         return new NextResponse(JSON.stringify(result), {status:200});

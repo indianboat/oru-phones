@@ -10,8 +10,8 @@ export const POST = async (req) => {
     mobile,
     password,
     skills,
-    experiences,
-    educations,
+    experience,
+    education,
     certificates,
     about,
     professionalDetail } = await req.json();
@@ -24,7 +24,7 @@ export const POST = async (req) => {
       return NextResponse.json({ error: 'User already exists !' }, { status: 422});
     } else {
       const passHash = await argon2i.hash(password);
-      const result = new User({ fname, lname, email, mobile, password:passHash, skills, experiences, educations, certificates, about, professionalDetail, name:`${fname} ${lname}` });
+      const result = new User({ fname, lname, email, mobile, password:passHash, skills, experience, education, certificates, about, professionalDetail, name:`${fname} ${lname}` });
       const data = await result.save();
 
       if (data) {

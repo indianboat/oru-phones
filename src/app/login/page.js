@@ -15,6 +15,7 @@ import Spinner from "../components/Spinner";
 const Signin = () => {
 
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { status } = useSession();
 
@@ -27,6 +28,7 @@ const Signin = () => {
   });
 
   async function onSubmit(values) {
+    setLoading(true)
     const res = await signIn("credentials", {
       redirect: false,
       email: values.email,
@@ -35,13 +37,12 @@ const Signin = () => {
     });
 
     if(res.error == null){
-      toast.success("Login success, redirecting...")
-      setInterval(() => {
-        redirect(res.url);
-      }, 2500);
+      toast.success("Login success, redirecting...");
+      setLoading(false);
     }
     else{
       toast.error(res.error, { duration:2500});
+      setLoading(false);
     }    
   }
 
@@ -55,6 +56,7 @@ const Signin = () => {
   return (
     <>
     <Toaster/>
+    {loading?<Spinner /> : null}
       <div className="container flex flex-col md:w-11/12 sm:w-full w-full mx-auto my-6 p-4">
         <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 grid-cols-1 justify-between gap-y-8">
           <div className="lg:rounded-tl-[50px] xl:py-16 lg:py-16 md:py-14 sm:py-12 py-6 xl:px-28 lg:px-16 md:px-14 sm:px-8 px-3 bg-slate-50 dark:bg-neutral-900">

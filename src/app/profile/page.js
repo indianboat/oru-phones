@@ -3,37 +3,40 @@
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { TbEdit, TbUpload } from "react-icons/tb";
 import Spinner from '../components/Spinner';
 
 
 const ProfileDashboard = () => {
 
+  const { push } = useRouter();
   const [loading, setLoading] = useState(false);
   const { data: session, status } = useSession(); // client side session
   const [user, setUser] = useState([]);
 
 
   useEffect(() => {
-
-    async function getUserData() {
+    if (session) {
       setLoading(true);
-      const getUser = await fetch(`http://localhost:3000/api/user/${session?.user.email}`, { cache: "force-cache" });
-      const userData = await getUser.json();
+      fetch(`/api/user/${session.user.email}`)
+        .then((response) => response.json())
+        .then((data) => setUser(data));
       setLoading(false);
-      setUser(userData)
     }
-    getUserData();
+
   }, [session]);
 
+  if (!user) {
+    return <Spinner/>;
+  }
 
   if (status === "loading") {
     return <Spinner/>;
   }
 
   if (status == "unauthenticated") {
-    redirect("/login");
+    push("/login");
   }
 
   return (
@@ -98,14 +101,14 @@ const ProfileDashboard = () => {
             </div>
 
             {
-              loading ? "Loading..." : user?.certificates[0]?.courseName == "" ? "No Certificates" : user?.certificates?.map((cert, index) => {
+              loading ? "Loading..." : user?.certificates?.length <= 0 ? "No Certificates" : user?.certificates?.map((cert, index) => {
                 return (<div key={index} className="border rounded-full flex items-center p-4">
                   <div className="">
                     <Image src="certificateIcon.svg" width={40} height={40} alt='certificateIcon' />
                   </div>
                   <div className="flex flex-col justify-center items-center w-full">
-                    <h2 className='font-medium text-lg'>{cert.courseName}</h2>
-                    <h2>{cert.companyName}</h2>
+                    <h2 className='font-medium text-lg text-center'>{cert.courseName}</h2>
+                    <h2 className='text-center'>{cert.companyName}</h2>
                   </div>
                 </div>)
               })
@@ -133,15 +136,15 @@ const ProfileDashboard = () => {
             </div>
 
             {
-              loading ? "Loading..." : user?.experiences[0]?.companyName == "" ? "No Experience" : user?.experiences?.map((exp, index) => {
+              loading ? "Loading..." : user?.experience?.length <= 0 ? "No Experience" : user?.experience?.map((exp, index) => {
                 return (
                   <div key={index} className="border rounded-2xl flex xl:flex-row lg:flex-row md:flex-col sm:flex-row flex-col items-center p-4 gap-2">
-                    <div className="flex flex-col justify-start items-start w-full border">
-                      <h1 className='font-medium'>{exp.totalExperience}</h1>
+                    <div className="flex flex-col justify-start items-start w-full">
+                      <h1 className='font-medium'>{exp.totalExperience} {`(${exp.from}-${exp.end})`}</h1>
                       <h1>{exp.companyName}</h1>
                     </div>
 
-                    <div className="flex flex-col justify-end lg:items-end md:items-start sm:items-end items-start w-full border">
+                    <div className="flex flex-col justify-end lg:items-end md:items-start sm:items-end items-start w-full">
                       <h1 className='text-gray-700 font-medium'>{exp.workType}</h1>
                       <h1 className='text-gray-700 capitalize'>{exp.designation}</h1>
                     </div>
@@ -174,18 +177,15 @@ const ProfileDashboard = () => {
             </div>
 
             {
-              loading ? "Loading..." : user?.educations[0]?.university == "" ? "No Education" : user?.educations?.map((edu, index) => {
+              loading ? "Loading..." : user?.education?.length <= 0 ? "No Education" : user?.education?.map((edu, index) => {
                 return (
                   <div key={index} className="border rounded-2xl flex flex-col p-4 gap-2">
                     <div className="">
                       <h1 className='text-[#413B89] font-semibold uppercase text-lg'>{edu.university}, {edu.city}</h1>
                     </div>
-                    <div className="flex justify-between items-center mb-2">
-                      <p className='font-medium italic'>{edu.batch.slice(0, 4)}</p>
+                    <div className="flex justify-between items-center">
                       <p className='font-medium uppercase'>{edu.degreeName}</p>
-                    </div>
-                    <div className="">
-                      <p className='text-justify'>{edu.desc}</p>
+                      <p className='font-medium italic'>{edu.batch.slice(0, 4)}</p>
                     </div>
                   </div>
                 )
