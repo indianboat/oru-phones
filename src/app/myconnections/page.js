@@ -4,9 +4,11 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import Spinner from '../components/Spinner';
+import { useRouter } from 'next/navigation';
 
 const MyConnections = () => {
-
+  
+  const {push} = useRouter();
   const [connections, setConnections] = useState([]);
   const [loading, setLoading] = useState(false);
   const { data: session, status } = useSession(); // client side session
