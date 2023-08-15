@@ -79,7 +79,7 @@ const ProfileDashboard = () => {
             <div>
               <h2 className='text-gray-600'>Email</h2>
               <div className="flex flex-row gap-2 justify-between items-center">
-                <p className='font-semibold lg:text-base md:text-[14px] sm:text-[13px] text-[12px]'>{loading ? "Loading..." : user?.email}</p>
+                <p className='font-semibold lowercase lg:text-base md:text-[14px] sm:text-[13px] text-[12px]'>{loading ? "Loading..." : user?.email}</p>
                 <button className='bg-[#F0EFFA] p-2 rounded-full shadow'><TbEdit /></button>
               </div>
             </div>
@@ -141,7 +141,7 @@ const ProfileDashboard = () => {
                   <div key={index} className="border rounded-2xl flex xl:flex-row lg:flex-row md:flex-col sm:flex-row flex-col items-center p-4 gap-2">
                     <div className="flex flex-col justify-start items-start w-full">
                       <h1 className='font-medium'>{exp.totalExperience} {`(${exp.from}-${exp.end})`}</h1>
-                      <h1>{exp.companyName}</h1>
+                      <h1 className='capitalize'>{exp.companyName}</h1>
                     </div>
 
                     <div className="flex flex-col justify-end lg:items-end md:items-start sm:items-end items-start w-full">

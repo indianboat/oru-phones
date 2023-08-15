@@ -39,6 +39,7 @@ const userSchema = new mongoose.Schema(
     imgUrl:String,
     connections:[
       {
+        email:String,
         name:String,
         role:String,
         company:String
@@ -47,7 +48,6 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
 
 mongoose.models = {};
 const User = mongoose.model("users", userSchema);

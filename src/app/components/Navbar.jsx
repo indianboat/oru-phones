@@ -54,8 +54,8 @@ const Navbar = () => {
                 <button><Image src="notificationIcon.svg" width={25} height={25} alt="notification-icon" /></button>
               </div>
 
-              <div className="p-2 lg:flex md:flex sm:hidden hidden gap-x-6 items-center rounded-md">
-                <div className="flex items-center gap-x-3">
+              <div className="p-2 lg:flex md:flex sm:hidden hidden gap-x-6 items-center rounded-lg border shadow">
+                <div className="flex items-center gap-x-3 ">
                   <Image src="avatar.svg" width={38} className=" rounded-md bg-[#FFA78D] " height={38} alt="avatar" />
                   <div className="flex flex-col">
                     <p className="text-[12px] text-[#373B5C]">Welcome back,</p>
